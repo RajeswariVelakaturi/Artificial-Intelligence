@@ -1,0 +1,8 @@
+sum(N,Z):-
+    Z is (N +1)* N/2.
+
+
+output:
+
+ sum(5,Z).
+Z = 15.
