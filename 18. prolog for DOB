@@ -1,0 +1,17 @@
+% Define facts for the database with names and DOB
+% syntax:person(Name,DOB).
+person(john, date(1990, 5, 15)).
+person(susan, date(1985, 12, 8)).
+person(michael, date(1995, 3, 20)).
+person(lisa, date(1980, 7, 2)).
+person(david, date(2000, 9, 12)).
+
+
+OUTPUT:
+1. person(Name,DOB).
+Name = john,
+DOB = date(1990, 5, 15) 
+
+
+2. person(lisa,DOB).
+DOB = date(1980, 7, 2).
