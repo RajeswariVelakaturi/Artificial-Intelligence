@@ -1,0 +1,55 @@
+def is_safe(node, color, coloring, graph):
+    for neighbor in graph[node]:
+        if coloring[neighbor] == color:
+            return False
+    return True
+
+def color_map(graph, colors, node, num_nodes, coloring):
+    if node == num_nodes:
+        return True
+
+    for color in colors:
+        if is_safe(node, color, coloring, graph):
+            coloring[node] = color
+            if color_map(graph, colors, node + 1, num_nodes, coloring):
+                return True
+            coloring[node] = None
+
+    return False
+
+def map_coloring(graph, colors):
+    num_nodes = len(graph)
+    coloring = [None] * num_nodes
+
+    if color_map(graph, colors, 0, num_nodes, coloring):
+        return coloring
+    else:
+        return None
+
+if __name__ == "__main__":
+    # Define the graph as an adjacency list
+    graph = {
+        0: [1, 2, 3],
+        1: [0, 2],
+        2: [0, 1, 3],
+        3: [0, 2]
+    }
+
+    # Define the available colors
+    available_colors = ["Red", "Green", "Blue"]
+
+    result = map_coloring(graph, available_colors)
+
+    if result:
+        for node, color in enumerate(result):
+            print(f"Region {node} is colored {color}")
+    else:
+        print("No solution found. Map coloring is not possible with the given constraints.")
+
+
+output:
+Region 0 is colored Red
+Region 1 is colored Green
+Region 2 is colored Blue
+Region 3 is colored Green
+
