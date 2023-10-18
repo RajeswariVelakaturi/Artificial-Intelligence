@@ -1,0 +1,38 @@
+ % Define facts for students, teachers, and subjects
+student(john, 101).
+student(lisa, 102).
+student(michael, 103).
+
+teacher(professor_smith, math).
+teacher(professor_jones, history).
+teacher(professor_doe, physics).
+
+% Define which student is taught by which teacher for a subject
+teaches(professor_smith, math, 101).
+teaches(professor_jones, history, 102).
+teaches(professor_doe, physics, 103).
+
+% Define a rule to find out who teaches a subject to a student
+teacher_for_subject(Student, Subject, Teacher) :-
+    student(Student, StudentID),
+    teaches(Teacher, Subject, StudentID).
+
+% Define a rule to find out which subjects are taught to a student by a teacher
+subjects_taught(Teacher, Student, Subjects) :-
+    student(Student, StudentID),
+    findall(Subject, teaches(Teacher, Subject, StudentID), Subjects).
+
+% Example queries:
+% 1. Find out who teaches math to student John.
+% teacher_for_subject(john, math, Teacher).
+
+% 2. Find out which subjects are taught to student Lisa by Professor Jones.
+% subjects_taught(professor_jones, lisa, Subjects).
+
+
+output:
+1. subjects_taught(professor_jones, lisa, Subjects).
+Subjects = [history].
+
+2.teacher_for_subject(john, math, Teacher).
+Teacher = professor_smith.
