@@ -1,0 +1,77 @@
+% Define nodes and edges in a graph
+edge(a, b, 2).
+edge(a, c, 1).
+edge(b, d, 5).
+edge(c, e, 3).
+edge(d, f, 4).
+edge(e, g, 2).
+edge(f, g, 1).
+
+% Heuristic values (e.g., estimated distances to the goal node)
+heuristic(a, 5).
+heuristic(b, 4).
+heuristic(c, 3).
+heuristic(d, 2).
+heuristic(e, 3).
+heuristic(f, 1).
+heuristic(g, 0).
+
+% Best-First Search algorithm
+best_first_search(Start, Goal, Path) :-
+    best_first_search_recursive([[(Start, 0)]], Goal, Path).
+
+% Base case: Reached the goal
+best_first_search_recursive([[Goal|Path]|_], Goal, [Goal|Path]).
+
+% Recursive case: Expand the current node's neighbors and add them to the queue
+best_first_search_recursive([Path|Paths], Goal, SolutionPath) :-
+    expand(Path, NewPaths),
+    append(Paths, NewPaths, AllPaths),
+    sort_paths(AllPaths, SortedPaths),
+    best_first_search_recursive(SortedPaths, Goal, SolutionPath).
+
+% Expand a path with the neighbors of the last node in the path
+expand([(Node, _)|Path], NewPaths) :-
+    findall([(Neighbor, Heuristic)|NodePath],
+            (edge(Node, Neighbor, _), \+ member((Neighbor, _), Path), heuristic(Neighbor, Heuristic)),
+            ExpandedPaths),
+    append_path_to_paths(ExpandedPaths, Path, NewPaths).
+
+% Append a path to a list of paths
+append_path_to_paths([], _, []).
+append_path_to_paths([Path|Paths], Prefix, [[Path|Prefix]|ResultPaths]) :-
+    append_path_to_paths(Paths, Prefix, ResultPaths).
+
+% Sort paths based on heuristic values (best-first strategy)
+sort_paths(Paths, SortedPaths) :-
+    predsort(compare_paths, Paths, SortedPaths).
+
+% Comparison predicate for sorting paths by heuristic values
+compare_paths(Order, Path1, Path2) :-
+    heuristic(Path1, Heuristic1),
+    heuristic(Path2, Heuristic2),
+    compare(Order, Heuristic1, Heuristic2).
+
+% Example query
+% Find the path from 'a' to 'g' using Best-First Search
+% ?- best_first_search(a, g, Path).
+
+
+
+
+output:
+
+1. edge(a,X,N).
+X = b,
+N = 2 .
+
+2. edge(X,Y,4).
+X = d,
+Y = f.
+
+3.  heuristic(d,N).
+N = 2.
+
+4. heuristic(X,0).
+X = g.
+ 
