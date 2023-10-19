@@ -1,0 +1,27 @@
+% Define individuals with health conditions
+has_condition(john, overweight).
+has_condition(lisa,lowBP ).
+has_condition(mike, overweight).
+has_condition(susan, lowBP).
+
+% Define diet suggestions
+suggested_diet(overweight, "take limited rice and avoid oil foods.").
+suggested_diet(lowBP, "dont skip food and  eat fruits .").
+
+% Rules to suggest a diet based on health condition
+suggest_diet(Person, Diet) :-
+    has_condition(Person, Condition),
+    suggested_diet(Condition, Diet).
+
+
+output:
+
+1. suggest_diet(john,Diet).
+Diet = "take limited rice and avoid oil foods.".
+
+2. has_condition(mike,Condition).
+Condition = overweight.
+
+3. suggested_diet(lowBP,Diet).
+Diet = "dont skip food and  eat fruits .".
+
