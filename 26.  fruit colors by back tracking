@@ -1,0 +1,34 @@
+% Define facts for fruits and their colors
+fruit(apple, red).
+fruit(banana, yellow).
+fruit(grape, purple).
+fruit(orange, orange).
+fruit(lemon, yellow).
+fruit(blueberry, blue).
+fruit(strawberry, red).
+
+% Query to find the color of a fruit
+get_color(Fruit, Color) :- fruit(Fruit, Color).
+
+% Query to find fruits of a specific color
+get_fruit(Color, Fruit) :- fruit(Fruit, Color).
+
+% Example queries
+% 1. Find the color of a banana (it should return yellow).
+% ?- get_color(banana, Color).
+
+% 2. Find a fruit that is red (it should return apple and strawberry using backtracking).
+% ?- get_fruit(red, Fruit).
+
+% 3. Find a fruit that is purple (it should return grape).
+% ?- get_fruit(purple, Fruit).
+
+
+
+output:
+
+1. get_fruit(red,Fruit).
+Fruit = apple .
+
+2.  get_color(banana,Color).
+Color = yellow.
