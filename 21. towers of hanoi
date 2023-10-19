@@ -1,0 +1,30 @@
+ move(1, X, Y, _) :-
+    write('Move top disk from '),
+    write(X),
+    write(' to '),
+    write(Y),
+    nl.
+
+move(N,X, Y,Z) :-
+    N > 1,
+    M is N - 1,
+    hanoi(M, X, Z, Y),
+    hanoi(1, X, Y, _),
+    hanoi(M, Z, Y, X).
+
+
+output:
+
+1. move(N,A,C,D).
+Move top disk from _8794 to _8796
+N = 1 .
+
+2.  move(N,A,C,_).
+Move top disk from _11336 to _11338
+N = 1 .
+
+3.   move(N,A,_,_).
+Move top disk from _2918 to _2920
+N = 1 
+
+
