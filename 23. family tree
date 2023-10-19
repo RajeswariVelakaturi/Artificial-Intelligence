@@ -1,0 +1,50 @@
+% Facts
+male(john).
+male(bob).
+male(mike).
+male(tom).
+female(susan).
+female(lisa).
+female(emily).
+female(ann).
+
+% Parent-child relationships
+parent(john, bob).
+parent(john, susan).
+parent(susan, emily).
+parent(bob, lisa).
+parent(bob, mike).
+parent(emily, ann).
+parent(lisa, tom).
+
+% Rules to define family relationships
+father(X, Y) :- male(X), parent(X, Y).
+mother(X, Y) :- female(X), parent(X, Y).
+sibling(X, Y) :- parent(Z, X), parent(Z, Y), X \= Y.
+grandparent(X, Y) :- parent(X, Z), parent(Z, Y).
+
+% Examples
+% 1. John is the father of Bob (true).
+% ?- father(john, bob).
+
+% 2. Lisa is a sibling of Mike (true).
+% ?- sibling(lisa, mike).
+
+% 3. Emily is the grandchild of John (true).
+% ?- grandparent(john, emily).
+
+
+
+output:
+
+1.  father(X,bob).
+X = john .
+
+2.  mother(lisa,Y).
+Y = tom.
+
+3.  grandparent(john,Y).
+Y = lisa .
+
+4. sibling(lisa,Y).
+Y = mike.
