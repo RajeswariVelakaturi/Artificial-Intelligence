@@ -1,0 +1,39 @@
+% Database of birds and whether they can fly
+can_fly(pigeon).
+can_fly(sparrow).
+can_fly(eagle).
+cannot_fly(penguin).
+cannot_fly(ostrich).
+
+% Predicate to check if a bird can fly
+flies(Bird) :-
+    can_fly(Bird).
+flies(Bird) :-
+    \+ cannot_fly(Bird).
+
+% Query examples
+% To check if a particular bird can fly: 
+% ?- flies(pigeon).
+%
+% To list birds that can fly:
+% ?- flies(Bird).
+%
+% To list birds that cannot fly:
+% ?- cannot_fly(Bird).
+
+
+
+
+output:
+
+1. can_fly(Bird).
+Bird = pigeon .
+
+2. flies(Bird).
+Bird = pigeon .
+
+3. cannot_fly(Bird).
+Bird = penguin .
+
+4. flies(penguin).
+false.
