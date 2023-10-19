@@ -1,0 +1,29 @@
+% Define symptoms and possible diseases
+symptom(fever).
+symptom(cough).
+symptom(headache).
+symptom(rash).
+symptom(fatigue).
+symptom(sore_throat).
+symptom(joint_pain).
+
+disease(covid_19, [fever, cough, fatigue, sore_throat]).
+disease(common_cold, [fever, cough, sore_throat, fatigue]).
+disease(influenza, [fever, cough, headache, fatigue]).
+disease(measles, [fever, cough, rash, fatigue]).
+disease(arthritis, [joint_pain, fatigue]).
+
+output:
+
+1. disease(Disease,Diseasesymptoms).
+Disease = covid_19,
+Diseasesymptoms = [fever, cough, fatigue, sore_throat] .
+
+2. disease(arthritis,Diseasesymptoms).
+Diseasesymptoms = [joint_pain, fatigue].
+
+3. disease(Disease,[joint_pain,fatigue]).
+Disease = arthritis.
+
+
+ 
